@@ -26,25 +26,22 @@ namespace Grid.Sample.iOS
 										Padding = new UIEdgeInsets(10,10,10,10) 
 									 }
 									 .WithRows(0.75f, 0.25f, 200f)
-									 .WithColumns(0.75f, 0.25f);
-			
-			portrait[0, 2][0] = red; 		// (row: 0, rowspan: 2) - (column: 0)
-			portrait[2][0, 2] =  blue; 		// (row: 2) - (column: 0, colspan: 2)
-			portrait[0][1] = cyan;  		// (row: 0) - (column: 1)
-			portrait[1][1] = yellow;        // (row: 1) - (column: 1)
-
+									 .WithColumns(0.75f, 0.25f)
+									 + red.At(0, 0).WithSpan(2, 1) 
+				  			         + blue.At(2, 0).WithSpan(1, 2) 
+									 + cyan.At(0, 1) 
+									 + yellow.At(1,1);
 
 			var landscape = new UIKit.Grid.Layout() 
 									 { 
-										Spacing = 10, 
-										Padding = new UIEdgeInsets(10, 10, 10, 10), 
+										Spacing = 20, 
+										Padding = new UIEdgeInsets(20, 20, 20, 20), 
 									 }
 									 .WithRows(1.00f)
-									 .WithColumns(0.50f, 0.25f, 0.25f);
-
-			landscape[0][0] = red;      	// (row: 0) - (column: 1)
-			landscape[0][1] = blue;     	// (row: 0) - (column: 1)
-			landscape[0][2] = cyan;        	// (row: 0) - (column: 2)
+									 .WithColumns(0.50f, 0.25f, 0.25f)
+									 + red.At(0, 0)
+									 + blue.At(0, 1)
+									 + cyan.At(0, 2);
 
 			var grid = new UIKit.Grid();
 
