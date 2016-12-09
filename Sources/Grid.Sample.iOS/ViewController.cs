@@ -46,7 +46,7 @@ namespace Grid.Sample.iOS
 			var grid = new UIKit.Grid();
 
 			grid.AddLayout(portrait);
-			grid.AddLayout(landscape, (width, height) => (width > height));
+			grid.AddLayout(landscape, (g) => (g.Frame.Width > g.Frame.Height));
 
 			this.View = grid;
 		}

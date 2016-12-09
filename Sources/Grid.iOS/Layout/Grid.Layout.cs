@@ -18,7 +18,7 @@
 
 			#region Trigger
 
-			public Func<nfloat, nfloat, bool> Trigger { get; set; }
+			public Func<Grid, bool> Trigger { get; set; }
 
 			#endregion
 

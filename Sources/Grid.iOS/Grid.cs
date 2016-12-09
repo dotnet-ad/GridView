@@ -26,31 +26,37 @@
 		{ 
 			get 
 			{
-				var layout = this.layouts.FirstOrDefault(l => l.Trigger?.Invoke(this.Frame.Width, this.Frame.Height) ?? false) ?? this.layouts.FirstOrDefault(l => l.Trigger == null);
-
-				if (currentLayout != layout)
-				{
-					this.currentLayout = layout;
-
-					if (layout != null)
-					{
-						foreach (var cell in this.Subviews.Where(v => !layout.Cells.Any(c => c.View == v)))
-						{
-							cell.RemoveFromSuperview();
-						}
-
-						foreach (var cell in layout.Cells.Where(v => !this.Subviews.Contains(v.View)))
-						{
-							this.AddSubview(cell.View);
-						}
-					}
-				}
-
-				return layout; 
+				if(this.currentLayout == null)
+					this.UpdateLayout();
+				return this.currentLayout; 
 			} 
 		}
 
-		public void AddLayout(Layout layout, Func<nfloat,nfloat,bool> trigger = null)
+		public void UpdateLayout()
+		{
+
+			var layout = this.layouts.FirstOrDefault(l => l.Trigger?.Invoke(this) ?? false) ?? this.layouts.FirstOrDefault(l => l.Trigger == null);
+
+			if (currentLayout != layout)
+			{
+				this.currentLayout = layout;
+
+				if (layout != null)
+				{
+					foreach (var cell in this.Subviews.Where(v => !layout.Cells.Any(c => c.View == v)))
+					{
+						cell.RemoveFromSuperview();
+					}
+
+					foreach (var cell in layout.Cells.Where(v => !this.Subviews.Contains(v.View)))
+					{
+						this.AddSubview(cell.View);
+					}
+				}
+			}
+		}
+
+		public void AddLayout(Layout layout, Func<Grid,bool> trigger = null)
 		{
 			layout.Trigger = trigger;
 			this.layouts.Add(layout);
@@ -88,6 +94,8 @@
 		public override void LayoutSubviews()
 		{
 			base.LayoutSubviews();
+
+			this.UpdateLayout();
 
 			// Calculating sizes
 			var absoluteRowHeight = this.CurrentLayout.CalculateAbsoluteRowHeight(this.Frame.Height);
