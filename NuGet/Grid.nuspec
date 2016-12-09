@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+   <metadata minClientVersion="2.8.1">
+       <id>Grid</id>
+       <version>$version$</version>
+       <title>Grid layout</title>
+       <authors>Aloïs Deniel</authors>
+       <owners>Aloïs Deniel</owners>
+     <licenseUrl>https://github.com/aloisdeniel/Grid/blob/master/LICENSE</licenseUrl>
+     <projectUrl>https://github.com/aloisdeniel/Grid</projectUrl>
+     <iconUrl>https://raw.githubusercontent.com/aloisdeniel/Grid/master/Documentation/Logo.png</iconUrl>
+       <requireLicenseAcceptance>false</requireLicenseAcceptance>
+       <description>A Xamarin helper grid layout view that uses C# operator override.</description>
+       <summary>A Xamarin helper grid layout view that uses C# operator override.</summary>
+     <tags>iOS, Android, Xamarin, layout, grid, cell</tags>
+   </metadata>
+   <files>
+     <file src="..\Sources\Grid.iOS\bin\Release\Grid.dll" target="lib\Xamarin.iOS10\Grid.dll" />
+   </files>
+</package>

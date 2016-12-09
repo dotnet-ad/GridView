@@ -10,7 +10,7 @@
 		{
 			#region Margins
 
-			public UIEdgeInsets Padding { get; set; }
+			public Insets Padding { get; set; }
 
 			public float Spacing { get; set; }
 

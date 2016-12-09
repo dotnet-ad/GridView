@@ -12,10 +12,6 @@
 			
 		}
 
-		#region Triggers
-
-		#endregion
-
 		#region Layout
 
 		private Layout currentLayout;
@@ -106,6 +102,47 @@
 			{
 				var position = GetCellAbsolutePosition(absoluteColumnWidth, absoluteRowHeight, cell.Position);
 				var size = GetCellAbsoluteSize(absoluteColumnWidth, absoluteRowHeight, cell.Position);
+
+				switch (cell.Position.Vertical)
+				{
+					case Layout.Alignment.Center:
+						position.Y += (size.Height / 2) - (cell.InitialSize.Height / 2);
+						size.Height = cell.InitialSize.Height;
+						break;
+
+					case Layout.Alignment.Start:
+						size.Height = cell.InitialSize.Height;
+						break;
+						
+					case Layout.Alignment.End:
+						position.Y += size.Height - cell.InitialSize.Height;
+						size.Height = cell.InitialSize.Height;
+						break;
+						
+					default:
+						break;
+				}
+
+				switch (cell.Position.Horizontal)
+				{
+					case Layout.Alignment.Center:
+						position.X += (size.Width / 2) - (cell.InitialSize.Width / 2);
+						size.Width = cell.InitialSize.Width;
+						break;
+
+					case Layout.Alignment.Start:
+						size.Width = cell.InitialSize.Width;
+						break;
+
+					case Layout.Alignment.End:
+						position.Y += size.Width - cell.InitialSize.Width;
+						size.Width = cell.InitialSize.Width;
+						break;
+
+					default:
+						break;
+				}
+
 				cell.View.Frame = new CGRect(position, size);
 			}
 		}
